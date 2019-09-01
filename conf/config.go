@@ -1,11 +1,8 @@
 package conf
 
 import (
-	"dogego/cache"
-	"dogego/executers"
-	"dogego/models"
-	"dogego/modules"
-	"dogego/tasks"
+	"go-fast-ws-mq/cache"
+	"go-fast-ws-mq/models"
 	"os"
 
 	"github.com/joho/godotenv"
