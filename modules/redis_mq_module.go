@@ -23,16 +23,20 @@ func (mq *RedisMQ) Publish(queuename string, message string) error {
 	return nil
 }
 
-func (mq *RedisMQ) Custome(queuename string, cb MessageCallback) {
+func (mq *RedisMQ) Custome(queuename string, cb MessageCallback) error {
 	sub := cache.CacheClient.Subscribe(global.QueueNameKey(queuename))
 
-	for message := range sub.Channel() {
-		err := cb(message.Payload)
+	go func() {
+		for message := range sub.Channel() {
+			err := cb(message.Payload)
 
-		if err != nil {
-			log.Printf("Execute Callback func Error: %s", err)
+			if err != nil {
+				log.Printf("Execute Callback func Error: %s", err)
+			}
 		}
-	}
+	}()
+
+	return nil
 }
 
 func InitRedisMQModule() {
