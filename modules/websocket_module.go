@@ -1,8 +1,6 @@
 package modules
 
 import (
-	"log"
-
 	"gopkg.in/olahol/melody.v1"
 )
 
@@ -12,7 +10,9 @@ func InitWebSocketModule() {
 	WebSocketModule = melody.New()
 
 	WebSocketModule.HandleConnect(func(session *melody.Session) {
-		channelId := session.Request.URL.Query()
-		log.Println(channelId)
+		channelId := session.Request.URL.Query()["channelId"][0]
+		RedisMQModule.Custome(channelId, func(message string) error {
+			return nil
+		})
 	})
 }
