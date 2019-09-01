@@ -1,9 +1,15 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"time"
+
+	"github.com/jinzhu/gorm"
+)
 
 type Channel struct {
 	gorm.Model
-	ChannelName string
+	Name        string
+	Description string
 	ConnectKey  string
+	CreateTime  time.Duration
 }
