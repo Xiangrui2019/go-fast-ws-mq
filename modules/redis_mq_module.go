@@ -9,7 +9,7 @@ import (
 type RedisMQ struct {
 }
 
-type RedisCallback func(message string) error
+type MessageCallback func(message string) error
 
 var RedisMQModule *RedisMQ
 
@@ -23,7 +23,7 @@ func (mq *RedisMQ) Publish(queuename string, message string) error {
 	return nil
 }
 
-func (mq *RedisMQ) Custome(queuename string, cb RedisCallback) error {
+func (mq *RedisMQ) Custome(queuename string, cb MessageCallback) error {
 	sub := cache.CacheClient.Subscribe(global.QueueNameKey(queuename))
 
 	go func() {
