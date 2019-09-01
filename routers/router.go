@@ -17,6 +17,8 @@ func NewRouter() *gin.Engine {
 	v1 := router.Group("/api/v1")
 	{
 		v1.POST("/ping", api.Ping)
+
+		v1.GET("/listen", api.ListenChannel)
 	}
 
 	return router
