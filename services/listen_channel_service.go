@@ -34,6 +34,23 @@ func (service *ListenChannelService) Listen(context *gin.Context) *serializer.Re
 		}
 	}
 
+	err = models.DB.Model(&models.Channel{}).Where("x = ?", service.ConnectKey).Count(&count).Error
+
+	if err != nil {
+		return &serializer.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "数据库出错.",
+			Error:   err.Error(),
+		}
+	}
+
+	if count == 0 {
+		return &serializer.Response{
+			Code:    http.StatusBadRequest,
+			Message: "ConnectKey 有误.",
+		}
+	}
+
 	err = modules.WebSocketModule.HandleRequest(context.Writer, context.Request)
 
 	if err != nil {
