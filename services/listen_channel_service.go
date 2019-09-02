@@ -15,7 +15,7 @@ type ListenChannelService struct {
 	ConnectKey int `form:"connect_key" json:"connect_key" binding:"required"`
 }
 
-func (service *ListenChannelService) Listen(context *gin.Context) *serializer.Response {
+func (service *ListenChannelService) Vaild() *serializer.Response {
 	count := 0
 	err := models.DB.Model(&models.Channel{}).Where("id = ?", service.ChannelId).Count(&count).Error
 
@@ -51,7 +51,15 @@ func (service *ListenChannelService) Listen(context *gin.Context) *serializer.Re
 		}
 	}
 
-	err = modules.WebSocketModule.HandleRequest(context.Writer, context.Request)
+	return nil
+}
+
+func (service *ListenChannelService) Listen(context *gin.Context) *serializer.Response {
+	if err := service.Vaild(); err != nil {
+		return err
+	}
+
+	err := modules.WebSocketModule.HandleRequest(context.Writer, context.Request)
 
 	if err != nil {
 		return &serializer.Response{
