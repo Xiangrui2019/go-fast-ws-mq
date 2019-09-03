@@ -6,7 +6,7 @@ func CreateChannel(context *gin.Context) {
 
 }
 
-func ListChannels(context *gin.Context) {
+func ListChannel(context *gin.Context) {
 
 }
 
