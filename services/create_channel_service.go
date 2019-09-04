@@ -46,15 +46,15 @@ func (service *CreateChannelService) Create() (*models.Channel, *serializer.Resp
 		ConnectKey:  uuid.NewV4().String(),
 	}
 
-	result := models.DB.Create(&channel)
+	err := models.DB.Create(&channel).Error
 
-	if result.Error != nil {
+	if err != nil {
 		return nil, &serializer.Response{
 			Code:    http.StatusInternalServerError,
 			Message: "数据库创建错误.",
-			Error:   result.Error.Error(),
+			Error:   err.Error(),
 		}
 	}
 
-	return result.Value.(*models.Channel), nil
+	return channel, nil
 }
