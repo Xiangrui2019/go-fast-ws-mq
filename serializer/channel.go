@@ -1,6 +1,9 @@
 package serializer
 
-import "go-fast-ws-mq/models"
+import (
+	"go-fast-ws-mq/models"
+	"net/http"
+)
 
 type PrivateChannel struct {
 	ID          uint   `json:"id"`
@@ -35,5 +38,23 @@ func BuildPublicChannel(channel *models.Channel) PublicChannel {
 		Name:        channel.Name,
 		Description: channel.Description,
 		CreatedAt:   channel.CreatedAt.Unix(),
+	}
+}
+
+// BuildPrivateChannelResponse 序列化channel响应
+func BuildPrivateChannelResponse(channel *models.Channel) *Response {
+	return &Response{
+		Code:    http.StatusOK,
+		Message: "序列化私有Channel成功.",
+		Data:    BuildPrivateChannel(channel),
+	}
+}
+
+// BuildPublicChannelResponse 序列化channel响应
+func BuildPublicChannelResponse(channel *models.Channel) *Response {
+	return &Response{
+		Code:    http.StatusOK,
+		Message: "序列化公开Channel成功.",
+		Data:    BuildPrivateChannel(channel),
 	}
 }
