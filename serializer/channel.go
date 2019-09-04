@@ -41,6 +41,28 @@ func BuildPublicChannel(channel *models.Channel) PublicChannel {
 	}
 }
 
+// BuildPrivateChannels 序列化私有Channel列表
+func BuildPrivateChannels(v []*models.Channel) []PrivateChannel {
+	channels := make([]PrivateChannel, 0)
+
+	for _, ch := range v {
+		channels = append(channels, BuildPrivateChannel(ch))
+	}
+
+	return channels
+}
+
+// BuildPublicChannels 序列化公开Channel列表
+func BuildPublicChannels(v []*models.Channel) []PublicChannel {
+	channels := make([]PublicChannel, 0)
+
+	for _, ch := range v {
+		channels = append(channels, BuildPublicChannel(ch))
+	}
+
+	return channels
+}
+
 // BuildPrivateChannelResponse 序列化channel响应
 func BuildPrivateChannelResponse(channel *models.Channel) *Response {
 	return &Response{
