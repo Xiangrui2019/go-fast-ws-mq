@@ -3,6 +3,7 @@ package services
 import (
 	"go-fast-ws-mq/models"
 	"go-fast-ws-mq/serializer"
+	"github.com/satori/go.uuid"
 )
 
 type CreateChannelService struct {
@@ -11,5 +12,9 @@ type CreateChannelService struct {
 }
 
 func (service *CreateChannelService) Create() (*models.Channel, *serializer.Response) {
-
+	channel := &models.Channel{
+		Name: service.Name,
+		Description: service.Description,
+		ConnectKey: ,
+	}
 }
