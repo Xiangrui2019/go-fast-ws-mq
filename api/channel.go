@@ -23,3 +23,7 @@ func CreateChannel(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, utils.BuildErrorResponse(err))
 	}
 }
+
+func ListChannel(context *gin.Context) {
+
+}
