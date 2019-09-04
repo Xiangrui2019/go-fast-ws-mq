@@ -6,6 +6,8 @@ import (
 )
 
 type CreateChannelService struct {
+	Name        string `form:"name" json:"name" binding:"required"`
+	Description string `form:"description" json:"description" binding:"required"`
 }
 
 func (service *CreateChannelService) Create() (*models.Channel, *serializer.Response) {
