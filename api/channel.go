@@ -25,5 +25,10 @@ func CreateChannel(context *gin.Context) {
 }
 
 func ListChannel(context *gin.Context) {
+	service := services.ListChannelService{}
 
+	if channels, err := service.List(); err == nil {
+	} else {
+		context.JSON(http.StatusBadRequest, err)
+	}
 }
