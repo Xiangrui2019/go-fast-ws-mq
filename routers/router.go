@@ -18,8 +18,12 @@ func NewRouter() *gin.Engine {
 	{
 		v1.POST("/ping", api.Ping)
 
+		// 消息接口
 		v1.POST("/message/publish", api.PublishMessage)
 		v1.GET("/channel/listen", api.ListenChannel)
+
+		// 频道CRUD接口
+		v1.POST("/channel", api.CreateChannel)
 	}
 
 	return router
