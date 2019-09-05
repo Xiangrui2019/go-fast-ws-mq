@@ -26,6 +26,7 @@ func NewRouter() *gin.Engine {
 		v1.GET("/channel", api.ListChannel)
 		v1.GET("/channel/:id", api.ShowChannel)
 		v1.POST("/channel", api.CreateChannel)
+		v1.DELETE("/channel/:id", api.DeleteChannel)
 	}
 
 	return router

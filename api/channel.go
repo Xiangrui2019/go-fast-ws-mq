@@ -48,3 +48,7 @@ func ShowChannel(context *gin.Context) {
 		context.JSON(http.StatusInternalServerError, err)
 	}
 }
+
+func DeleteChannel(context *gin.Context) {
+
+}
