@@ -11,8 +11,8 @@ import (
 )
 
 type ListenChannelService struct {
-	ChannelId  int `form:"channel_id" json:"channel_id" binding:"required"`
-	ConnectKey int `form:"connect_key" json:"connect_key" binding:"required"`
+	ChannelId  int    `form:"channel_id" json:"channel_id" binding:"required"`
+	ConnectKey string `form:"connect_key" json:"connect_key" binding:"required"`
 }
 
 func (service *ListenChannelService) Vaild() *serializer.Response {
@@ -34,7 +34,7 @@ func (service *ListenChannelService) Vaild() *serializer.Response {
 		}
 	}
 
-	err = models.DB.Model(&models.Channel{}).Where("x = ?", service.ConnectKey).Count(&count).Error
+	err = models.DB.Model(&models.Channel{}).Where("connect_key = ?", service.ConnectKey).Count(&count).Error
 
 	if err != nil {
 		return &serializer.Response{

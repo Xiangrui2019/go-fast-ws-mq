@@ -11,7 +11,7 @@ import (
 func PublishMessage(context *gin.Context) {
 	service := services.PublishMessageService{}
 
-	if err := context.ShouldBind(&service); err != nil {
+	if err := context.ShouldBind(&service); err == nil {
 		result := service.Publish()
 
 		context.JSON(result.Code, result)
