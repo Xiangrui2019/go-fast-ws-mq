@@ -10,7 +10,7 @@ import (
 
 type CreateChannelService struct {
 	Name        string `form:"name" json:"name" binding:"required"`
-	Description string `form:"description" json:"description" binding:"required"`
+	Description string `form:"description" json:"description"`
 }
 
 func (service *CreateChannelService) Vaild() *serializer.Response {
@@ -25,10 +25,10 @@ func (service *CreateChannelService) Vaild() *serializer.Response {
 		}
 	}
 
-	if count == 0 {
+	if count != 0 {
 		return &serializer.Response{
 			Code:    http.StatusBadRequest,
-			Message: "无法找到对应的频道.",
+			Message: "channel名称重复了.",
 		}
 	}
 
