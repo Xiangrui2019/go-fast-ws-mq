@@ -34,3 +34,7 @@ func ListChannel(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, err)
 	}
 }
+
+func ShowChannel(context *gin.Context) {
+
+}
