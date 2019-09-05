@@ -28,13 +28,23 @@ func ListChannel(context *gin.Context) {
 	service := services.ListChannelService{}
 
 	if channels, err := service.List(); err == nil {
-		context.JSON(http.StatusOK,
-			serializer.BuildPublicChannels(channels))
+		context.JSON(http.StatusOK, &serializer.Response{
+			Code:    http.StatusOK,
+			Message: "序列化Channels成功.",
+			Data:    serializer.BuildPublicChannels(channels),
+		})
 	} else {
-		context.JSON(http.StatusBadRequest, err)
+		context.JSON(http.StatusInternalServerError, err)
 	}
 }
 
 func ShowChannel(context *gin.Context) {
+	service := services.ShowChannelService{}
 
+	if channel, err := service.Show(context); err == nil {
+		context.JSON(http.StatusOK,
+			serializer.BuildPublicChannelResponse(channel))
+	} else {
+		context.JSON(http.StatusInternalServerError, err)
+	}
 }
