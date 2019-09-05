@@ -50,5 +50,9 @@ func ShowChannel(context *gin.Context) {
 }
 
 func DeleteChannel(context *gin.Context) {
+	service := services.DeleteChannelService{}
 
+	result := service.Delete(context)
+
+	context.JSON(result.Code, result)
 }
