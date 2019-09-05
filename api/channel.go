@@ -28,6 +28,8 @@ func ListChannel(context *gin.Context) {
 	service := services.ListChannelService{}
 
 	if channels, err := service.List(); err == nil {
+		context.JSON(http.StatusOK,
+			serializer.BuildPublicChannels(channels))
 	} else {
 		context.JSON(http.StatusBadRequest, err)
 	}
