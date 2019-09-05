@@ -23,10 +23,10 @@ func NewRouter() *gin.Engine {
 		v1.GET("/channel/listen", api.ListenChannel)
 
 		// 频道CRUD接口
-		v1.GET("/channel", api.ListChannel)
-		v1.GET("/channel/:id", api.ShowChannel)
-		v1.POST("/channel", api.CreateChannel)
-		v1.DELETE("/channel/:id", api.DeleteChannel)
+		v1.GET("/channel/list", api.ListChannel)
+		v1.GET("/channel/:id/show", api.ShowChannel)
+		v1.POST("/channel/create", api.CreateChannel)
+		v1.DELETE("/channel/:id/delete", api.DeleteChannel)
 	}
 
 	return router
